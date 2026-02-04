@@ -1,19 +1,20 @@
-# include <iostream>
+# include <stdio.h>
 # include <queue>
+# include <vector>
 using namespace std;
 int main()
 {
     int n;
-    cin>>n;
+    scanf("%d",&n);
     priority_queue<int,vector<int>,greater<int>>p;
     for(int i=0;i<n;i++)
     {
         int num;
-        cin>>num;
+        scanf("%d",&num);
         p.push(num);
     }
 
-    int ans=0;
+    long long ans=0;
 
     while(p.size()>1)
     {
@@ -21,10 +22,10 @@ int main()
         p.pop();
         int second=p.top();
         p.pop();
-        int result=first+second;
+        long long result=first+second;
         ans+=result;
         p.push(result);
     }
-    cout<<ans<<endl;
+    printf("%lld\n",ans);
     return 0;
 }
