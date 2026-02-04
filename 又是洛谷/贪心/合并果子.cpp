@@ -1,20 +1,29 @@
 # include <iostream>
-# include <algorithm>
+# include <queue>
 using namespace std;
 int main()
 {
     int n;
     cin>>n;
-    int arr[n];
+    priority_queue<int,vector<int>,greater<int>>p;
     for(int i=0;i<n;i++)
     {
-        cin>>arr[i];
+        int num;
+        cin>>num;
+        p.push(num);
     }
-    sort(arr,arr+n);
+
     int ans=0;
-    for(int i=0;i<n;i++)
+
+    while(p.size()>1)
     {
-        ans+=arr[i]*(n-i);
+        int first=p.top();
+        p.pop();
+        int second=p.top();
+        p.pop();
+        int result=first+second;
+        ans+=result;
+        p.push(result);
     }
     cout<<ans<<endl;
     return 0;
