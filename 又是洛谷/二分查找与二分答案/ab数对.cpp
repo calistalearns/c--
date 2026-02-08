@@ -1,42 +1,32 @@
 # include <iostream>
-# include <algorithm>
-# define MAX 1000005
-int n,c;
-int arr[MAX];
-int find(int arr[])
-{
-    int count=0;//计数
-    int l=1,r=n;
-    while(l<=r)
-    {
-        int mid=l+(r-l)/2;
-        int ans=arr[r]-arr[l];
-        if(ans==c&arr[r]!=arr[r-1]&&arr[l]!=arr[l+1])
-        {
-            count++;
-            r++;
-            l--;
-        }
-        else if(ans!=c)
-        {
-            
-        }
-    }
-    return count;
-}
+# include <unordered_map>
+
+int n;
+long long c;
+
 using namespace std;
 int main()
 {
     ios::sync_with_stdio(false);
-    cin.tie(0);
-    
+    cin.tie(0);  
     cin>>n>>c;
-    
-    for(int i=1;i<=n;i++)
+    unordered_map<long long,int>freq;
+    long long x;
+    for(int i=0;i<n;i++)
     {
-        cin>>arr[i];
+        cin>>x;
+        freq[x]++;
     }
-    sort(arr,arr+n);//从小到大
-    cout<<find(arr)<<endl;
+    long long ans=0;
+    for(auto&p:freq)
+    {
+        long long b=p.first;
+        long long target=b+c;
+        if(freq.count(target))
+        {
+            ans+=(long long)p.second*freq[target];
+        }
+    }
+    cout<<ans<<endl;
     return 0;
 }
