@@ -1,0 +1,29 @@
+# include <iostream>
+using namespace std;
+int m,n,len=1;//从哪到哪
+int f[1005][1005];
+void Plus(int x)
+{
+    for(int i=1;i<=len;i++)
+    {
+        f[x][i]=f[x-1][i]+f[x-2][i];
+    }
+    for(int i=1;i<=len;i++)
+    {
+        if(f[x][i]>9)
+        {
+            f[x][i+1]+=f[x][i]/10;
+            f[x][i]%=10;
+        }
+    }
+    if(f[x][len+1])len++;
+}
+int main()
+{
+    cin>>m>>n;
+    f[1][1]=1;f[2][1]=2;
+    for(int i=3;i<=n-m;i++) Plus(i);
+    for(int i=len;i;i--)printf("%d",f[n-m][i]);
+
+    return 0;
+}
